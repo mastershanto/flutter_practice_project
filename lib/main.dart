@@ -1,90 +1,55 @@
-/// Ajijul Hoque, Assignment of Module-5, Flutter Batch-4, ostad.app;
-
+/// Ajijul Hoque, LiveTest of Module-5, Flutter Batch-4, ostad.app;
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(Flutter_Assignment_M5());
+  runApp(const MyApp());
 }
 
-class Flutter_Assignment_M5 extends StatelessWidget {
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "flutter_assignment_m5",
-      home: HomeActivity(),
-      // debugShowCheckedModeBanner: true,
+      title: 'live_test_m5',
+      home: MyHomePage(),
     );
   }
 }
 
-class HomeActivity extends StatelessWidget {
+class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-          backgroundColor: Colors.white,
+        child: Scaffold(
           appBar: AppBar(
-            toolbarHeight: 100,
-            elevation: 70,
-            backgroundColor: Colors.green,
-            foregroundColor: Colors.white,
             title: Text(
-              "Home",
+              "Profile",
             ),
-            titleTextStyle: TextStyle(
-                fontSize: 20, color: Colors.white, fontWeight: FontWeight.w900),
+            titleTextStyle: TextStyle(fontSize: 25, color: Colors.white),
             centerTitle: true,
-            leading: Icon(
-              Icons.add_business,
-              size: 18,
-            ),
-            actions: [
-              Icon(
-                Icons.search,
-                size: 18,
-              ),
-              SizedBox(
-                width: 13,
-              ),
-            ],
+            backgroundColor: Colors.blue,
           ),
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  "This is mod 5 Assignment",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15),
+              children: [
+                Icon(
+                  Icons.account_circle,
+                  color: Colors.green,
+                  size: 60,
                 ),
-                RichText(
-                  text: TextSpan(
-                    style: TextStyle(fontSize: 20, color: Colors.orange),
-                    children: [
-                      TextSpan(
-                          text: 'My ', style: TextStyle(color: Colors.red)),
-                      TextSpan(
-                          text: 'phone ',
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 10, /*fontWeight: FontWeight.bold*/
-                          )),
-                      TextSpan(
-                          text: 'name ',
-                          style: TextStyle(
-                              color: Colors.purpleAccent,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold)),
-                      TextSpan(
-                        text: 'Your phone name',
-                      ),
-                    ],
-                  ),
+                Text(
+                  "Sheikh Ajijul Hoque (Shanto)",
+                  style: TextStyle(fontSize: 25, color: Colors.green),
+                ),
+                Text(
+                  "Flutter Batch-4",
+                  style: TextStyle(fontSize: 20, color: Colors.blue),
                 ),
               ],
             ),
-          )),
-    );
+          ),
+        ));
   }
 }
