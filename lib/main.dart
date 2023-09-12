@@ -1,55 +1,55 @@
-/// Ajijul Hoque, LiveTest of Module-5, Flutter Batch-4, ostad.app;
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  // give me some widget
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+// Hot reload => ctl + s
+// Hot restart => ctl + shift + \
 
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'live_test_m5',
-      home: MyHomePage(),
+      debugShowCheckedModeBanner: true,
+      home: HomeScreen(),
+      title: 'Ostad app',
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text(
-              "Profile",
-            ),
-            titleTextStyle: TextStyle(fontSize: 25, color: Colors.white),
-            centerTitle: true,
-            backgroundColor: Colors.blue,
+    return Scaffold(
+      backgroundColor: Colors.blueGrey,
+      appBar: AppBar(
+        backgroundColor: Colors.purple,
+        centerTitle: true,
+        title: Text('Home'),
+        leading: Icon(
+          Icons.adb_rounded,
+          color: Colors.amber,
+          size: 32,
+        ),
+      ),
+      body: Column(
+        children: [
+          Text(
+            'Home screen',
+            style: TextStyle(
+                color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
           ),
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.account_circle,
-                  color: Colors.green,
-                  size: 60,
-                ),
-                Text(
-                  "Sheikh Ajijul Hoque (Shanto)",
-                  style: TextStyle(fontSize: 25, color: Colors.green),
-                ),
-                Text(
-                  "Flutter Batch-4",
-                  style: TextStyle(fontSize: 20, color: Colors.blue),
-                ),
-              ],
-            ),
+          Text(
+            'Home',
+            style: TextStyle(
+                color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
           ),
-        ));
+          Text('Hello world'),
+          Icon(Icons.access_time_outlined),
+        ],
+      ),
+    );
   }
 }
