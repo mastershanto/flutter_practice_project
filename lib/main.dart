@@ -5,6 +5,8 @@ final String formatted = formatter.format(now);
 print(formatted); // something like 2013-04-20
   */
 
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -30,123 +32,120 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Colors.grey,
       appBar: AppBar(
-        backgroundColor: Colors.purple,
+        backgroundColor: Colors.lightGreen,
         centerTitle: true,
         title: Text('Home'),
         leading: Icon(
           Icons.add_business,
-          color: Colors.amber,
-          size: 32,
+          color: Colors.black,
+          size: 40,
         ),
       ),
-      // body: Column(
-      //   children: [
-      //     Column(
-      //       mainAxisAlignment: MainAxisAlignment.center,
-      //       crossAxisAlignment: CrossAxisAlignment.end,
-      //       children: [
-      //         Text('Hello world'),
-      //         Text('Hello world'),
-      //         Text('Hello world'),
-      //         Text('Hello world'),
-      //         Text('Hello world'),
-      //         Row(
-      //           mainAxisAlignment: MainAxisAlignment.center,
-      //           crossAxisAlignment: CrossAxisAlignment.center,
-      //           children: [
-      //             Text('hello '),
-      //             Text('world '),
-      //             Text('are '),
-      //             Text('you '),
-      //             Text('listening'),
-      //           ],
-      //         )
-      //       ],
-      //     ),
-      //     Row(
-      //       children: [
-      //         Text('sdfdsf'),
-      //         Text('sdfdsf'),
-      //         Text('sdfdsf'),
-      //         Text('sdfdsf'),
-      //       ],
-      //     )
-      //   ],
-      // ),
-      body: Column(
-        children: [
-          Row(
+      body: Padding(
+        padding: const EdgeInsets.all(50.0),
+        child: Center(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text('Sheikh '),
-              Text('Ajijul '),
-              Text('Hoque '),
-              Text('(Shanto)'),
-            ],
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [Text('_______++++++++++_______')],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text("What's up"),
-              Text('"Class" '),
-            ],
-          ),
-          Image.asset(
-            'images/dalli.jpg',
-            width: 120,
-            height: 90,
-            fit: BoxFit.cover,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Image.network(
-                'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
-                width: 200,
-                height: 100,
-                fit: BoxFit.fill,
+              Container(
+                alignment: Alignment.center,
+                width: 300,
+                height: 75,
+                margin: EdgeInsets.symmetric(horizontal: 20),
+                child: Text(
+                  "Login Here",
+                  style: TextStyle(
+                      color: Colors.deepPurple,
+                      fontSize: 45,
+                      fontWeight: FontWeight.bold),
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Colors.black,width: 2),
+                  borderRadius: BorderRadius.circular(15),
+
+
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextField(
+                style: TextStyle(),
+                decoration: InputDecoration(
+                  label: Text("Email"),
+                  labelStyle: TextStyle(color: Colors.black),
+                  fillColor: Colors.white,
+                  filled: true,
+                  hintText: "Enter your email address.....",
+                  hintStyle: TextStyle(color: Colors.blueGrey),
+                  suffixIcon: Icon(
+                    Icons.email,
+                    color: Colors.deepPurple,
+                  ),
+                  prefixIcon: Icon(Icons.email, color: Colors.deepPurple),
+                  suffixIconColor: Colors.deepPurple,
+                  prefixIconColor: Colors.deepPurple,
+                  border: OutlineInputBorder(),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red, width: 2)),
+                  disabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black, width: 2)),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue, width: 2),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextField(
+                obscureText: true,
+                controller: TextEditingController(),
+                style: TextStyle(),
+                decoration: InputDecoration(
+                  label: Text("Password"),
+                  labelStyle: TextStyle(color: Colors.black),
+                  fillColor: Colors.white,
+                  filled: true,
+                  hintText: "Enter your email password.....",
+                  hintStyle: TextStyle(color: Colors.blueGrey),
+                  suffixIcon: Icon(
+                    Icons.email,
+                    color: Colors.deepPurple,
+                  ),
+                  prefixIcon: Icon(Icons.email, color: Colors.deepPurple),
+                  suffixIconColor: Colors.deepPurple,
+                  prefixIconColor: Colors.deepPurple,
+                  border: OutlineInputBorder(),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.red, width: 2),
+                  ),
+                  disabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.green),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue)),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              ElevatedButton(
+                onPressed: () {},
+                child: Text("Login"),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple,
+                  foregroundColor: Colors.white,
+
+                ),
+
               ),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('To register, tap on '),
-              Text('Sign up'),
-            ],
-          ),
-          RichText(
-            text: TextSpan(
-              style: TextStyle(fontSize: 20, color: Colors.purple),
-              children: [
-                TextSpan(
-                    text: "materShanto", style: TextStyle(fontSize: 30)),
-                TextSpan(text: 'Name ', style: TextStyle(color: Colors.amber)),
-                TextSpan(
-                    text: 'Is skflds ',
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600)),
-              ],
-            ),
-          ),
-          RichText(
-              text: TextSpan(text: 'To register, tap on ', children: [
-            TextSpan(
-                text: 'Sign up',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18))
-          ]))
-        ],
+        ),
       ),
     );
   }
