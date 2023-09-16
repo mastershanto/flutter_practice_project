@@ -5,9 +5,17 @@ final String formatted = formatter.format(now);
 print(formatted); // something like 2013-04-20
   */
 
-import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_practice_project/widgets/alartMessage_2.dart';
+import 'package:flutter_practice_project/widgets/listViewSeparated_9.dart';
+import 'package:flutter_practice_project/widgets/myAppBar_8.dart';
+import 'package:flutter_practice_project/widgets/gridViewBuilder_7.dart';
+import 'package:flutter_practice_project/widgets/listViewBuilder_6.dart';
+import 'package:flutter_practice_project/widgets/myItems_1.dart';
+import 'package:flutter_practice_project/widgets/listView_3.dart';
+import 'package:flutter_practice_project/widgets/navigator_5.dart';
+import 'package:flutter_practice_project/widgets/textField_4.dart';
 
 void main() {
   // give me some widget
@@ -29,6 +37,12 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatelessWidget {
+
+  MySnackBar(massage, context) {
+    return ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(massage)));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,110 +57,11 @@ class HomeScreen extends StatelessWidget {
           size: 40,
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(50.0),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                alignment: Alignment.center,
-                width: 300,
-                height: 75,
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                child: Text(
-                  "Login Here",
-                  style: TextStyle(
-                      color: Colors.deepPurple,
-                      fontSize: 45,
-                      fontWeight: FontWeight.bold),
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(color: Colors.black,width: 2),
-                  borderRadius: BorderRadius.circular(15),
+      body: /*ListViewBuilder_6()*/
+      /*GridViewBuilder_7()*/
+      /*ListViewSeparated_9()*/
+      My_Navigator_5()
 
-
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              TextField(
-                style: TextStyle(),
-                decoration: InputDecoration(
-                  label: Text("Email"),
-                  labelStyle: TextStyle(color: Colors.black),
-                  fillColor: Colors.white,
-                  filled: true,
-                  hintText: "Enter your email address.....",
-                  hintStyle: TextStyle(color: Colors.blueGrey),
-                  suffixIcon: Icon(
-                    Icons.email,
-                    color: Colors.deepPurple,
-                  ),
-                  prefixIcon: Icon(Icons.email, color: Colors.deepPurple),
-                  suffixIconColor: Colors.deepPurple,
-                  prefixIconColor: Colors.deepPurple,
-                  border: OutlineInputBorder(),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red, width: 2)),
-                  disabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black, width: 2)),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 2),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              TextField(
-                obscureText: true,
-                controller: TextEditingController(),
-                style: TextStyle(),
-                decoration: InputDecoration(
-                  label: Text("Password"),
-                  labelStyle: TextStyle(color: Colors.black),
-                  fillColor: Colors.white,
-                  filled: true,
-                  hintText: "Enter your email password.....",
-                  hintStyle: TextStyle(color: Colors.blueGrey),
-                  suffixIcon: Icon(
-                    Icons.email,
-                    color: Colors.deepPurple,
-                  ),
-                  prefixIcon: Icon(Icons.email, color: Colors.deepPurple),
-                  suffixIconColor: Colors.deepPurple,
-                  prefixIconColor: Colors.deepPurple,
-                  border: OutlineInputBorder(),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red, width: 2),
-                  ),
-                  disabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.green),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue)),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                child: Text("Login"),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurple,
-                  foregroundColor: Colors.white,
-
-                ),
-
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }
