@@ -1,16 +1,10 @@
-# flutter_practice_project
+#flutter_liveTest_Module-6
+# by "Ajijul Hoque"
+# master-flutter_practice_project, 
 
-This is a learing & practice project.
+ This project is a live coding text project for Module-6, Flutter Batch-4, ostad.app
+# OUTPUT
 
-## Getting Started
+<img width="378" alt="flutter_liveTest_m6" src="https://github.com/mastershanto/flutter_practice_project/assets/57057476/8c02376e-05a5-4c5f-b768-4d7fe72642dd">
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
