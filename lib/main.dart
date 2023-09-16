@@ -1,67 +1,65 @@
-/*
-final DateTime now = DateTime.now();
-final DateFormat formatter = DateFormat('yyyy-MM-dd');
-final String formatted = formatter.format(now);
-print(formatted); // something like 2013-04-20
-  */
-
+/// Ajijul Hoque, live Test for Module-6, Flutter Batch-4, ostad.app;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_practice_project/widgets/alartMessage_2.dart';
-import 'package:flutter_practice_project/widgets/listViewSeparated_9.dart';
-import 'package:flutter_practice_project/widgets/myAppBar_8.dart';
-import 'package:flutter_practice_project/widgets/gridViewBuilder_7.dart';
-import 'package:flutter_practice_project/widgets/listViewBuilder_6.dart';
-import 'package:flutter_practice_project/widgets/myItems_1.dart';
-import 'package:flutter_practice_project/widgets/listView_3.dart';
-import 'package:flutter_practice_project/widgets/navigator_5.dart';
-import 'package:flutter_practice_project/widgets/textField_4.dart';
 
 void main() {
-  // give me some widget
-  runApp(MyApp());
+  runApp(LiveTest_M6());
 }
 
-// Hot reload => ctl + s
-// Hot restart => ctl + shift + \
+class LiveTest_M6 extends StatelessWidget {
 
-class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
       home: HomeScreen(),
-      title: 'masterShanto App',
+      title: 'flutter liveText module-6',
     );
   }
 }
 
 class HomeScreen extends StatelessWidget {
 
-  MySnackBar(massage, context) {
-    return ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(massage)));
-  }
+ final myItemList = ["Apples", "Bananas", "Bread", "Milk", "Eggs"];
+
+  HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.lightGreen,
+        backgroundColor: Colors.blue,
         centerTitle: true,
-        title: Text('Home'),
-        leading: Icon(
-          Icons.add_business,
-          color: Colors.black,
-          size: 40,
-        ),
+        title: Text('My Shopping List'),
+        titleTextStyle: TextStyle(fontSize: 30, color: Colors.white),
+        actions: [
+          Icon(
+            Icons.shopping_cart,
+            color: Colors.white,
+            size: 40,
+          ),
+          SizedBox(
+            width: 25,
+          )
+        ],
       ),
-      body: /*ListViewBuilder_6()*/
-      /*GridViewBuilder_7()*/
-      /*ListViewSeparated_9()*/
-      My_Navigator_5()
-
+      body: Padding(
+        padding: EdgeInsets.all(20),
+        child: ListView.builder(
+            itemCount: myItemList.length,
+            itemBuilder: (context, index) {
+              return Column(
+                children: [
+                  ListTile(
+                    leading: Icon(Icons.shopping_basket_sharp),
+                    title: Text("${myItemList[index]}"),
+                  )
+                ],
+              );
+            }),
+      ),
     );
   }
 }
