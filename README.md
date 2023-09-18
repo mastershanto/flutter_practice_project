@@ -1,16 +1,7 @@
-# flutter_practice_project
+# Flutter_Assignment_Module-6
+# -by "Ajijul Hoque (Shanto)"
+master branch- flutter_practice_project, 
+"This project is an assingment project for Module-6, Flutter Batch-4, ostad.app"
+# OUTPUT
 
-This is a learing & practice project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img width="251" alt="flutter_assignment_m6_screenShot" src="https://github.com/mastershanto/flutter_practice_project/assets/57057476/61dd24c1-0b14-4141-8b43-ffee480140d1">
