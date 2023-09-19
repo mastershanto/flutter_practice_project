@@ -85,7 +85,15 @@ class HomeScreen extends StatelessWidget {
                   decoration: InputDecoration(
                     hintText: "Search for photos...",
                     hintStyle: TextStyle(fontSize: 20),
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.transparent), // Set the color to transparent
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.transparent), // Set the color to transparent
+                    ),
                   ),
                 ),
               ),
