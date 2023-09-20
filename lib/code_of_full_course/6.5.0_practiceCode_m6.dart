@@ -9,10 +9,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-          appBarTheme: AppBarTheme(),
-          drawerTheme: DrawerThemeData(),
-          navigationDrawerTheme: NavigationDrawerThemeData(),
-          bottomNavigationBarTheme: BottomNavigationBarThemeData()
+        appBarTheme: AppBarTheme(),
+        drawerTheme: DrawerThemeData(),
+        navigationDrawerTheme: NavigationDrawerThemeData(),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData()
       ),
 
 
@@ -110,8 +110,8 @@ class HomeScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) => ProductListScreen(
-                                productList: students,
-                              )));
+                                    productList: students,
+                                  )));
                     },
                     child: Text("Go to ProductListScreen")),
               ],
