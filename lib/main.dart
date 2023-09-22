@@ -1,177 +1,160 @@
-import 'package:flutter/material.dart';
+///TODO: Flutter-4_Module-7_LiveClass-2_Commit-1 (Cupertino_IOS)
+
+/*
+import 'package:flutter/cupertino.dart';
 
 void main() {
-  // give me some widget
   runApp(MyApp());
 }
-
-// Hot reload => ctl + s
-// Hot restart => ctl + shift + \
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: true,
-      home: HomeScreen(),
-      title: 'Flutter Assignment for Module-6',
+    return CupertinoApp(
+      home: Home(),
     );
   }
 }
 
-class HomeScreen extends StatelessWidget {
-  MySnackBar(massage, context) {
-    return ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(massage)));
-  }
-
-  final MyPhotoGallery = [
-    {
-      "img":
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIBvc6GVZc4rxXOl0l0pG5fsF42RL80VbSkQ&usqp=CAU",
-      "title": "Photo 1"
-    },
-    {
-      "img":
-          "https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_1280.jpg",
-      "title": "Photo 2"
-    },
-    {
-      "img":
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7oHSo7LlQ86aP3ohc2QRzhqoUI-Krb_Qm7g&usqp=CAU",
-      "title": "Photo 3"
-    },
-    {
-      "img":
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0QXvUxsQuJMmCZLvQ6BfiQYnJouBLCiR27Q&usqp=CAU",
-      "title": "Photo 4"
-    },
-    {
-      "img":
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHQ4KlPQKj6Ie5OlJYg-sLRDMSU9Taed1Tyw&usqp=CAU",
-      "title": "Photo 5"
-    },
-    {
-      "img":
-          "https://img.freepik.com/free-photo/closeup-vertical-shot-cute-european-shorthair-cat_181624-34587.jpg?size=626&ext=jpg&ga=GA1.2.649895941.1684173728&semt=sph",
-      "title": "Photo 6"
-    },
-  ];
+class Home extends StatelessWidget {
+  const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          centerTitle: true,
-          backgroundColor: Colors.blue,
-          title: Text('Photo Gallery'),
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        leading: Icon(CupertinoIcons.home),
+        middle: Text('Home'),
+        trailing: CupertinoSwitch(
+          onChanged: (bool onChange) {},
+          value: true,
         ),
-        body: Padding(
-          padding: EdgeInsets.all(15),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Welcome to My Photo Gallery!",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 30),
-              Container(
-                width: double.infinity,
-                height: 50,
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: "Search for photos...",
-                    hintStyle: TextStyle(fontSize: 20),
-                    border: OutlineInputBorder(
-
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.transparent), // Set the color to transparent
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.transparent), // Set the color to transparent
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Expanded(
-                // flex: 3,
-                child: GridView.builder(
-                  itemCount: MyPhotoGallery.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    mainAxisSpacing: 20,
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 30,
-                    childAspectRatio: 1,
-                  ),
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        MySnackBar(
-                            "You tapped on '${MyPhotoGallery[index]["title"]}'",
-                            context);
-                      },
-                      child: Column(
-                        children: [
-                          Container(
-                            width: double.infinity,
-                            height: 100,
-                            child: Image.network(
-                              MyPhotoGallery[index]["img"]!,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            "${MyPhotoGallery[index]["title"]}",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ),
-              Expanded(
-                  child: ListView.builder(
-                      itemCount: MyPhotoGallery.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          leading: ClipOval(
-                            child: Image.network(
-                              MyPhotoGallery[index]["img"]!,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          title: Text("${MyPhotoGallery[index]["title"]}"),
-                          subtitle: Text("Description for photo ${index + 1}"),
-                        );
-                      })),
-            ],
-          ),
-        ),
-        floatingActionButton: Align(
-          alignment: Alignment.bottomCenter,
-          child: FloatingActionButton(
-            onPressed: () {
-              MySnackBar("Photos Uploaded Successfully!", context);
-            },
-            child: Icon(
-              Icons.upload,
-              size: 30,
-            ),
-          ),
+      ),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Hello world'),
+            Text('Hello world'),
+            Text('Hello world'),
+            Text('Hello world'),
+            Text('Hello world'),
+            Text('Hello world'),
+            CupertinoButton.filled(child: Text('sfd'), onPressed: () {}),
+            CupertinoTextField(),
+            CupertinoTabBar(items: [
+              BottomNavigationBarItem(
+                  label: 'sdfd', icon: Icon(CupertinoIcons.home)),
+              BottomNavigationBarItem(
+                  label: 'sdfd', icon: Icon(CupertinoIcons.home)),
+              BottomNavigationBarItem(
+                  label: 'sdfd', icon: Icon(CupertinoIcons.home)),
+            ])
+          ],
         ),
       ),
     );
   }
 }
+*/
+
+///TODO: Flutter-4_Module-7_LiveClass-2_Commit-2 (switch,alertDialog,bottomSheet)
+/*
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Home(),
+    );
+  }
+}
+
+class Home extends StatelessWidget {
+  const Home({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Home'),
+      ),
+      body: Column(
+        children: [
+          Switch(value: true, onChanged: (bool value) {}),
+          ElevatedButton(
+            onPressed: () {
+              showDialog(
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text('Alert'),
+                      content: Text('You are in danger'),
+                      actions: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text('Cancel')),
+                        TextButton(
+                            onPressed: () {
+                              // ACTION
+                            },
+                            child: Text('Okay')),
+                      ],
+                    );
+                  });
+            },
+            child: Text('Show dialog'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              showAboutDialog(
+                  context: context,
+                  applicationName: "PikaPie",
+                  applicationVersion: '1.0.4',
+                  children: [
+                    Text('This application is good for regular uses!')
+                  ]);
+            },
+            child: Text('show about'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              showModalBottomSheet(
+                  isDismissible: false,
+                  backgroundColor: Colors.grey.shade100,
+                  barrierColor: Colors.black45,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(16),
+                        topRight: Radius.circular(16),
+                      )
+                  ),
+                  context: context, builder: (context) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Center(
+                        child: Text('This is bottom sheet'),
+                      )
+                    ],
+                  ),
+                );
+              });
+            }, child: Text('show bottom sheet'),),
+        ],
+      ),
+    );
+  }
+}
+*/
