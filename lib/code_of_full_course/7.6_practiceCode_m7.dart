@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_practice_project/components/styles.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,10 +13,7 @@ class MyApp extends StatelessWidget {
           appBarTheme: AppBarTheme(),
           drawerTheme: DrawerThemeData(),
           navigationDrawerTheme: NavigationDrawerThemeData(),
-          bottomNavigationBarTheme: BottomNavigationBarThemeData()
-      ),
-
-
+          bottomNavigationBarTheme: BottomNavigationBarThemeData()),
       debugShowCheckedModeBanner: true,
       home: HomeScreen(),
       title: 'Basic Navigator Activities',
@@ -41,7 +39,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Navigator Home'),
+        title: Text('Navigator Home',style: headLine(context),),
       ),
       body: Scrollbar(
           thickness: 20,
@@ -110,8 +108,8 @@ class HomeScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) => ProductListScreen(
-                                productList: students,
-                              )));
+                                    productList: students,
+                                  )));
                     },
                     child: Text("Go to ProductListScreen")),
               ],
@@ -287,10 +285,12 @@ class ProductListScreen extends StatelessWidget {
           itemBuilder: (context, index) {
             return ListTile(
               title: Text("${HomeScreen().students[index]}"),
-              onTap: (){
-                Navigator.push(context,MaterialPageRoute(builder: (context){
-                  return ProductDetailsScreen(productDetails: HomeScreen().students[index],);
-                }));
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return ProductDetailsScreen(
+                    productDetails: HomeScreen().students[index],
+                  );
+                })).then((value) => print(value));
               },
             );
           },
@@ -312,7 +312,20 @@ class ProductDetailsScreen extends StatelessWidget {
         title: Text("ProductDetailsScreen"),
       ),
       body: Center(
-        child: Text("$productDetails"),
+        child: Column(
+          children: [
+            Text("$productDetails"),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context,"masterShanto");
+              },
+              child: Text("Back"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
