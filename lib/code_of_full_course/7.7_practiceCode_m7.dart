@@ -61,7 +61,12 @@ class _HomeScreenState extends State<HomeScreen> {
               counter = counter + 1;
             });
           } else {
-            counter = 0;
+            setState(() {
+              counter=0;
+            });
+
+
+
           }
         },
         child: Icon(Icons.add),
