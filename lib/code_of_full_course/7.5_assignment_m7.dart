@@ -1,4 +1,6 @@
 ///TODO: Flutter-4_Module-7_Assignment
+/// Ajijul Hoque, Assignment for Module-7, Flutter Batch-4, ostad.app;
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,11 +13,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: HomeScreen(),
     );
   }
 }
-
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -88,7 +90,8 @@ class _HomeScreenState extends State<HomeScreen> {
     };
   }*/
 
-  int _counter=0;
+  // int _counter=0;
+  int productCount = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            "Home Screen",
+            "Product List",
             style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
@@ -106,44 +109,47 @@ class _HomeScreenState extends State<HomeScreen> {
           child: ListView.builder(
               itemCount: productList.length,
               itemBuilder: (context, index) {
-
-                double prices=productList[index]["price"];
-                int itemCount=0;
+                double prices = productList[index]["price"];
+                // int itemCount = 0;
                 return Column(
                   children: [
                     ListTile(
                       title: Text("${productList[index]["name"]}"),
                       subtitle: Text("\$${prices.toStringAsFixed(2)}"),
-
                       trailing: Column(
                         children: [
                           Text("Count ${productList[index]["quantity"]}"),
                           ElevatedButton(
                               onPressed: () {
+                                if (productList[index]["quantity"] > 0 &&
+                                    productList[index]["quantity"] < 2) {
+                                  productCount++;
+                                }
+
                                 if (productList[index]["quantity"] < 5) {
                                   setState(() {
                                     productList[index]["quantity"]++;
-                                    _counter=productList[index]["quantity"]++;
+                                    if (productList[index]["quantity"] == 5) {
+                                      showDialog(
+                                          barrierDismissible: false,
+                                          context: context,
+                                          builder: (context) {
+                                            return AlertDialog(
+                                              title: Text("Congratulations!"),
+                                              content: Text(
+                                                  "You've bought 5 ${productList[index]["name"]}!"),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Text("Ok"),
+                                                ),
+                                              ],
+                                            );
+                                          });
+                                    }
                                   });
-                                } else {
-                                  showDialog(
-                                      barrierDismissible: false,
-                                      context: context,
-                                      builder: (context) {
-                                        return AlertDialog(
-                                          title: Text("Congratulations!"),
-                                          content: Text(
-                                              "You've bought 5 Product${index}"),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                              child: Text("Okey"),
-                                            ),
-                                          ],
-                                        );
-                                      });
                                 }
                               },
                               child: Text("Buy Now"))
@@ -157,38 +163,12 @@ class _HomeScreenState extends State<HomeScreen> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return CartScreen(countItems: _counter);
+              return CartScreen(countItems: productCount);
             }));
           },
           child: Icon(Icons.shopping_cart),
         ),
       ),
-    );
-  }
-}
-
-class ProductAmount extends StatefulWidget {
-  const ProductAmount({super.key});
-
-  @override
-  State<ProductAmount> createState() => _ProductAmountState();
-}
-
-class _ProductAmountState extends State<ProductAmount> {
-  int counter = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ElevatedButton(
-            onPressed: () {
-              setState(() {
-                counter++;
-              });
-            },
-            child: Text("Buy Now"))
-      ],
     );
   }
 }
@@ -207,11 +187,15 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Cart Screen"),
+        centerTitle: true,
+        title: Text(
+          "Cart",
+          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+        ),
       ),
       body: Center(
         child: Text(
-          "Total Product: ${widget.countItems},",
+          "Total Products: ${widget.countItems}",
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
         ),
       ),
