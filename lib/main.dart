@@ -100,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           title: Text(
             "Product List",
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
         ),
@@ -115,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     ListTile(
                       title: Text("${productList[index]["name"]}"),
-                      subtitle: Text("\$${prices.toStringAsFixed(2)}"),
+                      subtitle: Text("Price: \$${prices.toStringAsFixed(2)}"),
                       trailing: Column(
                         children: [
                           Text("Count ${productList[index]["quantity"]}"),
@@ -189,14 +189,14 @@ class _CartScreenState extends State<CartScreen> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          "Cart",
-          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          "Cart Page",
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
         ),
       ),
       body: Center(
         child: Text(
           "Total Products: ${widget.countItems}",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),
       ),
     );
