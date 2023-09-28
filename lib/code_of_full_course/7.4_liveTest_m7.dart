@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text("Count:", style: TextStyle(fontSize: 25)),
-              Text("$counter",
+              Text("${counter}",
                   style: TextStyle(
                       fontSize: 70,
                       fontWeight: FontWeight.bold,
@@ -54,29 +54,31 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   ElevatedButton(
                       onPressed: () {
-                        int _increase = 0;
+                        int increase = 0;
                         setState(() {
-                          if (counter < 5) {
-                            _increase++;
-                            counter = counter + _increase;
-                          } else {
-                            showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    title: Text(
-                                      "Button pressed 5 times",
-                                      style: TextStyle(fontSize: 20),
-                                    ),
-                                    actions: [
-                                      TextButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: Text("Close"))
-                                    ],
-                                  );
-                                });
+                          if (counter >= 0) {
+                            increase++;
+                            counter = counter + increase;
+                            if (counter != 0 && counter % 5 == 0) {
+                              showDialog(
+                                  barrierDismissible: false,
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: Text(
+                                        "Button pressed $counter times",
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: Text("Close"))
+                                      ],
+                                    );
+                                  });
+                            }
                           }
                         });
                       },

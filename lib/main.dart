@@ -1,4 +1,6 @@
-///TODO: Ajijul Hoque, LiveTest for Module-7, Flutter Batch-4, ostad.app;
+///TODO: Ajijul Hoque, LiveClass for Module-8, Flutter Batch-4, ostad.app;
+
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -26,78 +28,75 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int counter = 0;
-
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Counter App",
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-          ),
-          centerTitle: false,
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+    Size size1 = MediaQuery.of(context).size;
+    Size size2 = MediaQuery.sizeOf(context);
+
+    /// Part-1
+    print("size1:$size1");
+    print("size2:$size2");
+    print("size.width:${size1.width}");
+    print("size.height:${size1.height}");
+    print("size.aspectRatio:${size1.aspectRatio}");
+    print("size.flipped:${size1.flipped}");
+
+    /// Part-2
+    Orientation orientation = MediaQuery.orientationOf(context);
+    print(orientation);
+
+    /// Part-3
+    List<DisplayFeature> displayFeature = MediaQuery.displayFeaturesOf(context);
+    print(displayFeature);
+
+    /// Part-4
+    print(MediaQuery.devicePixelRatioOf(context));
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Responsive Widgets"),
+      ),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          ///Properties of constraints
+          print(constraints.flipped);
+          print(constraints.maxWidth);
+          print(constraints.maxHeight);
+          print(constraints.widthConstraints());
+          print(constraints.biggest);
+
+          if (constraints.maxWidth > 500) {
+            return Center(child: Text("masterShanto"));
+          }
+          ;
+          return Column(
             children: [
-              Text("Count:", style: TextStyle(fontSize: 25)),
-              Text("$counter",
-                  style: TextStyle(
-                      fontSize: 70,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black)),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                      onPressed: () {
-                        int _increase = 0;
-                        setState(() {
-                          if (counter < 5) {
-                            _increase++;
-                            counter = counter + _increase;
-                          } else {
-                            showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    title: Text(
-                                      "Button pressed 5 times",
-                                      style: TextStyle(fontSize: 20),
-                                    ),
-                                    actions: [
-                                      TextButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: Text("Close"))
-                                    ],
-                                  );
-                                });
-                          }
-                        });
-                      },
-                      child: Text("+", style: TextStyle(fontSize: 30))),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  ElevatedButton(
-                      onPressed: () {
-                        if (counter > 0) {
-                          setState(() {
-                            counter = counter - 1;
-                          });
-                        }
-                      },
-                      child: Text("-", style: TextStyle(fontSize: 30))),
-                ],
-              )
+              Center(
+                child: OrientationBuilder(
+                  builder: (context, orientation) {
+                    return Text(orientation == Orientation.portrait
+                        ? "Potrait"
+                        : "Landscap");
+                  },
+                ),
+              ),
+              Wrap(alignment: WrapAlignment.center, children: [
+                Text("kjkfjkdkfdjfldjfdf" ),
+                SizedBox(width:5,),
+                Text("kjkfjkdkfdjfldjfdf" ),
+                SizedBox(width:5,),
+                Text("kjkfjkdkfdjfldjfdf" ),
+                SizedBox(width:5,),
+                Text("kjkfjkdkfdjfldjfdf" ),
+
+                Text("kjkfjkdkfdjfldjfddkfldjlf" ),
+                SizedBox(width:5,),
+                Text("dkfkdjfkdjfkjdlkjldjldjfljldjfldljldfjkjkfjkdkfdjfldjfdf" ),
+
+              ]),
             ],
-          ),
-        ),
+          );
+        },
       ),
     );
   }
