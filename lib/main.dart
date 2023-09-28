@@ -1,22 +1,22 @@
-
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
-
-
-void main(){
+void main() {
   runApp(MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: HomeScreen(),
-    );
+    return ResponsiveApp(builder: (BuildContext context) {
+      return MaterialApp(
+        home: HomeScreen(),
+      );
+    });
   }
 }
-
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -27,7 +27,18 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Home'),
       ),
-      body: Center(
+      body: Text("Shanto"),
+    );
+  }
+}
+/*ResponsiveBuilder(
+        builder: (context, sizeInformation) {
+          return Center(
+            child: Text(sizeInformation.deviceScreenType.toString()),
+          );
+        },
+      ),*/
+/*Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -65,7 +76,4 @@ class HomeScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
+      ),*/
