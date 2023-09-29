@@ -18,3 +18,6 @@ TextStyle headLine(context) {
     );
   }
 }
+TextStyle mSizedText({color}){
+  return TextStyle(fontSize: 20, color:color??Colors.black, fontWeight: FontWeight.w900);
+}
