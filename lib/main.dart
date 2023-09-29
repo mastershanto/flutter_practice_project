@@ -88,19 +88,9 @@ class _HomeScreenState extends State<HomeScreen> {
     },
   ];
 
-  //Style Resource
-  TextStyle MyTextStyle_1({color}) {
-    return TextStyle(
-        fontSize: 20,
-        color: color ?? Colors.black,
-        fontWeight: FontWeight.w900);
-  }
-
-  //Items in Gride
-
   @override
   Widget build(BuildContext context) {
-    Orientation orientation1 = MediaQuery.orientationOf(context);
+    // Orientation orientation1 = MediaQuery.orientationOf(context);
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
@@ -108,45 +98,73 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           body: OrientationBuilder(
             builder: (context, orientation) {
-              return orientation1 == Orientation.portrait
-                  ?Center(
-                  child: Container(
+              return orientation == Orientation.portrait
+                  ? Center(
+                      child: Container(
+                        
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: ListView.builder(
+                          itemCount: MyPhotoGallery_2.length,
+                          itemBuilder: (context, index) {
+                            return Card(
+                              elevation: 20,
+                              child: Stack(
+                                children: [
+                                  Card(
+                                    elevation: 10,
+                                  ),
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: SizedBox(
+                                      width: 150,
+                                        height: 150,
+                                      child: Image.network("${MyPhotoGallery_2[index]["img"]}"),
+                                    ),
+                                  ),
 
-                    padding: EdgeInsets.all(10.0),
-                    child: ListView.builder(
-                        itemCount: MyPhotoGallery_2.length,
-                        itemBuilder: (context,index){
-                          return Card(
-
-                            child: Image.network(
-                              "${MyPhotoGallery_2[index]["img"]}",width: 150,height: 150,),
-                          );
-                        }),
-                  ))
+                                ],
+                              ),
+                            );
+                          }),
+                    ))
                   : Center(
-                  child: Container(
-                    padding: EdgeInsets.all(10.0),
-                    child: Expanded(
-                      flex: 2,
-                      child: Center(
-                        child: Container(
-                            child: AspectRatio(
-                              aspectRatio: 16 / 16,
-                              child: GridView.builder(
-                                  gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2),
-                                  itemBuilder: (context, index) {
-                                    return Card(
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: GridView.builder(
+                            itemCount: MyPhotoGallery_2.length,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    crossAxisSpacing: 10,
+                                    mainAxisSpacing: 10),
+                            itemBuilder: (context, index) {
+                              return Card(
+                                child: AspectRatio(
+                                  aspectRatio: 1,
+                                  child: Stack(
+                                    children: [
+                                      Card(
+                                        elevation: 20,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.center,
+                                        child: Card(
+                                          elevation: 10,
 
-                                      child: Image.network(
-                                        "${MyPhotoGallery_2[index]["img"]}",width: 150,height: 150,),
-                                    );
-                                  }),
-                            )),
+                                        child: Image.network(
+                                          "${MyPhotoGallery_2[index]["img"]}",
+                                          width: 150,
+                                          height: 150,
+                                          fit: BoxFit.fill,
+                                        ),
+                                    ),
+                                      ),]
+                                  ),
+                                ),
+                              );
+                            }),
                       ),
-                    ),
-                  ));
+                    );
             },
           )),
     );
