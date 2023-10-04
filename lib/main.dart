@@ -111,7 +111,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     Orientation orientation1 = MediaQuery.orientationOf(context);
-    return SafeArea(
+    return Text("Need Code");
+  }
+}
+//Code of Assignment of Module-8
+/*SafeArea(
       child: Scaffold(
         appBar: AppBar(
           title: Text("Profile"),
@@ -228,6 +232,4 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
       ),
-    );
-  }
-}
+    )*/
