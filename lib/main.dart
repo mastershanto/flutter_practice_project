@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "My Bag",
+      title: "Assignment for Module-9",
       home: HomeScreen(),
     );
   }
