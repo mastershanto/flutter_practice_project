@@ -65,10 +65,13 @@ class _HomeScreenState extends State<HomeScreen> {
       "quantity": 0.00
     },
   ];
-  double totalAmount = 0;
+
   MySnackBar(message, context) {
     return ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(message)));}
+        .showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  double totalAmount = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -233,18 +236,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       onPressed: () {
                                                         setState(() {
                                                           if (clothItemsList[
-                                                                      index]
-                                                                  ["quantity"] >=
+                                                                      index][
+                                                                  "quantity"] >=
                                                               1) {
                                                             clothItemsList[
                                                                     index]
                                                                 ["quantity"]--;
+                                                            totalAmount =
+                                                                totalAmount -
+                                                                    clothItemsList[
+                                                                            index]
+                                                                        [
+                                                                        "price"];
                                                           }
 
-                                                          if(clothItemsList[index]["quantity"]>0){
-                                                            totalAmount=totalAmount-clothItemsList[index]["price"];
-
-                                                          }
+                                                          if (clothItemsList[
+                                                                      index]
+                                                                  ["quantity"] >
+                                                              0) {}
                                                         });
                                                       },
                                                       child: Card(
@@ -275,9 +284,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         setState(() {
                                                           clothItemsList[index]
                                                               ["quantity"]++;
-                                                          totalAmount=totalAmount+clothItemsList[index]["price"];
+                                                          totalAmount =
+                                                              totalAmount +
+                                                                  clothItemsList[
+                                                                          index]
+                                                                      ["price"];
                                                         });
-
                                                       },
                                                       child: Card(
                                                         child: Padding(
@@ -336,7 +348,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     flex: 2,
                     child: ElevatedButton(
                       onPressed: () {
-                        MySnackBar("Congratulations! You have bought successfully. \nTotal Amount:\$${totalAmount}.", context);
+                        if (totalAmount <= 0) {
+                          MySnackBar(
+                              "Sorry! No selected item has been selected. \nTotal Amount:\$${totalAmount}.",
+                              context);
+                        } else {
+                          MySnackBar(
+                              "Congratulations! You have bought successfully. \nTotal Amount:\$${totalAmount}.",
+                              context);
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
