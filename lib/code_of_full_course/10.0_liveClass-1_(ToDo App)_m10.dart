@@ -33,26 +33,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List<Todo> todoList = [];
 
-  void addTodo(Todo todo){
-    todoList.add(todo);
-    setState(() {});
-  }
-
-  void deleteTodo(int index) {
-    todoList.removeAt(index);
-    setState(() {});
-  }
-
-  void updateTodo(int index, String todoDetails) {
-    todoList[index].details = todoDetails;
-    setState(() {});
-  }
-
-  void updateTodoStatus(int index, String status) {
-    todoList[index].status = status;
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   });
             },
-            onLongPress: (){
+            onLongPress: () {
               String currentStatus = todo.status == 'pending' ? 'done' : 'pending';
               updateTodoStatus(index, currentStatus);
             },
@@ -145,6 +125,25 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  void addTodo(Todo todo) {
+    todoList.add(todo);
+    setState(() {});
+  }
+
+  void deleteTodo(int index) {
+    todoList.removeAt(index);
+    setState(() {});
+  }
+
+  void updateTodo(int index, String todoDetails) {
+    todoList[index].details = todoDetails;
+    setState(() {});
+  }
+
+  void updateTodoStatus(int index, String status) {
+    todoList[index].status = status;
+    setState(() {});
+  }
 }
 
 
@@ -261,7 +260,6 @@ class UpdateTaskModal extends StatefulWidget {
 }
 
 class _UpdateTaskModalState extends State<UpdateTaskModal> {
-
   late TextEditingController todoTEController;
 
   @override
