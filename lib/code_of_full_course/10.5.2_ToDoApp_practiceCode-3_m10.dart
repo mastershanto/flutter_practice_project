@@ -1,5 +1,7 @@
-/// ToDo Application
+/// ToDo Application [Uncompleted];
 /// CRUD -> Create, Read, Update, Delete
+
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -67,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
           itemCount: todoList.length,
           itemBuilder: (context, index) {
             final Todo todoBuilder = todoList[index];
-            final String formattedDate = DateFormat("hh:MM a dd-MM-yyyy").format(todoBuilder.createdTime);
+            final String formattedDate = DateFormat("hh:mm a dd-MM-yyyy").format(todoBuilder.createdTime);
             return ListTile(
               tileColor:
                   todoBuilder.todoStatus == "done" ? Colors.yellow : null,
@@ -85,12 +87,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               title: Text("Edit"),
                               onTap: () {
                                 Navigator.pop(context);
-                                showModalBottomSheet(
-                                    context: context,
-                                    builder: (context) {
-                                      return Text("Should be update");
-                                    });
-                              },
+
+                                    }
                             ),
                             const Divider(
                               height: 0,
