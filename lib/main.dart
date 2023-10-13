@@ -1,16 +1,20 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 void main() {
-  runApp(const TodoApp());
+  runApp(DevicePreview(builder: (context){
+    return LiveText_m10();
+  }));
 }
 
-class TodoApp extends StatelessWidget {
-  const TodoApp({super.key});
+class LiveText_m10 extends StatelessWidget {
+  const LiveText_m10({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      title: "liveTest for Module-10",
       home: HomeScreen(),
     );
   }
@@ -41,6 +45,14 @@ class _HomeScreenState extends State<HomeScreen> {
     {"fruit": "Orange", "status": ""},
   ];
 
+  UpdateStatus(index, status) {
+    setState(() {
+      fruitsList[index]["status"] = status;
+    });
+  }
+
+  int selectionCount=0;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -48,16 +60,25 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           title: const Text('Selection Screen'),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: const Icon(Icons.check,size: 30,),
-        ),
         body: ListView.separated(
           itemCount: fruitsList.length,
           itemBuilder: (context, index) {
             return ListTile(
+              tileColor: fruitsList[index]["status"] == "Selected"
+                  ? Colors.blue
+                  : null,
+              onTap: () {
+                String fruitStatus =
+                    fruitsList[index]["status"] == "" ? "Selected" : "";
+                UpdateStatus(index, fruitStatus);
+                if(fruitsList[index]["status"]=="Selected"){
+                  selectionCount++;
+                }else{
+                  selectionCount--;
+                }
+              },
               leading: CircleAvatar(
-                child: Text("$index"),
+                child: Text("${index + 1}"),
               ),
               title: Text("${fruitsList[index]["fruit"]}"),
               trailing: Text("${fruitsList[index]["status"]}"),
@@ -68,6 +89,30 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 4,
             );
           },
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text("Selected Items"),
+                    content: Text("Number of selected items: ${selectionCount}"),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text("Close"),
+                      )
+                    ],
+                  );
+                });
+          },
+          child: const Icon(
+            Icons.check,
+            size: 30,
+          ),
         ),
       ),
     );
