@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
-          child: const Icon(Icons.add),
+          child: const Icon(Icons.check,size: 30,),
         ),
         body: ListView.separated(
           itemCount: fruitsList.length,
