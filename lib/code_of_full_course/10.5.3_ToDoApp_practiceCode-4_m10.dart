@@ -335,7 +335,6 @@ class _UpdateTodoModalState extends State<UpdateTodoModal> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pop(context);
                   if (_globalKey_Update.currentState!.validate()) {
                     widget.onTodoUpdateTab(_todoTEController_Update.text.trim());
                   }
