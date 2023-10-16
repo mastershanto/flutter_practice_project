@@ -1,3 +1,7 @@
+///TODO: https://github.com/mastershanto/flutter_practice_project/blob/flutter_assignment_m10/lib/main.dart
+/// Ajijul Hoque (Shanto), Assignment of Module-10, Flutter Batch-4, ostad.app;
+/// Todo: This is a CRUD Project
+
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 
@@ -32,9 +36,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<Products> myProductList = [];
 
-  addItem(Products items) {
+  addItem(Products products) {
     setState(() {
-      myProductList.add(items);
+      myProductList.add(products);
+      if(products.description==""){
+        products.description="This is description....";
+      }
     });
   }
 
@@ -51,20 +58,13 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  addColor(int index) {
-    setState(() {});
+  addColor({required int index,required var color}){
+    myProductList[index].color=color;
   }
 
-  mySnakBar(message,context){
-    return ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: message));
-  }
-
-  myAlertDialog(message,context){
-    return AlertDialog(
-      content: Text(message),
-    );
-  }
-
+  MySnackBar(massage, context) {
+    return ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(massage,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.greenAccent,),textAlign: TextAlign.center,)));}
 
   TextEditingController title_TEController = TextEditingController();
   TextEditingController description_TEController = TextEditingController();
@@ -72,6 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return SafeArea(
         child: Scaffold(
           appBar: AppBar(
@@ -123,12 +124,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     TextFormField(
                       controller: description_TEController,
-                      validator: (content) {
-                        if (content?.isEmpty ?? true) {
-                          return "Enter a valid value: Description!";
-                        }
-                        return null;
-                      },
+
+                      /*validator: (content) {
+                    if (content?.isEmpty ?? true) {
+                      return "Enter a valid value: Description!";
+                    }
+                    return null;
+                  },*/
                       decoration: InputDecoration(
                         hintText: "Add description",
                         enabledBorder: OutlineInputBorder(
@@ -146,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           if (_globalKey.currentState!.validate()) {
                             addItem(Products(
                               title: title_TEController.text.trim(),
-                              description: description_TEController.text.trim(),
+                              description:description_TEController.text.trim(),
                             ));
                             title_TEController.clear();
                             description_TEController.clear();
@@ -166,10 +168,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     Flexible(
                       child: ListView.separated(
                         itemBuilder: (context, index) {
-                          Color currentColor =
-                          myProductList[index].color == Colors.red
-                              ? Colors.purpleAccent
-                              : Colors.red;
+                          // myProductList[index].color==Colors.purpleAccent ? addColor(index: index, color: Colors.red):addColor(index: index, color: Colors.purpleAccent);
+                          if(index%2==0){
+                            var color=Colors.blueGrey;
+                            addColor(index: index,color: color);
+                          }else{
+                            var color=Colors.cyan;
+                            addColor(index: index,color: color);
+                          }
+
                           return Container(
                             width: double.infinity,
                             color: Color(0xffE0E0E0),
@@ -179,36 +186,51 @@ class _HomeScreenState extends State<HomeScreen> {
                                     context: context,
                                     builder: (context) {
                                       return AlertDialog(
-                                        title: Text("Action"),
+                                        titlePadding: EdgeInsets.only(right: 15,top: 0,left: 15,bottom: 0),
+                                        title: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Text(" "),
+                                                IconButton(onPressed: (){
+                                                  Navigator.pop(context);
+                                                },icon: Icon(Icons.cancel,size: 40,color: Colors.red)
+
+                                                ),
+                                              ],
+                                            ),
+                                            Text("Action",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+                                          ],
+                                        ),
                                         content: Row(
                                           mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                           children: [
                                             TextButton(
                                               onPressed: () {
-                                                Navigator.of(context).pop;
+                                                Navigator.pop(context);
                                                 showModalBottomSheet(
                                                     context: context,
-                                                    builder: (context) {
+                                                    builder: (context){
                                                       return UpdateProductModal(
                                                         products:
                                                         myProductList[index],
 
                                                         onTab_updateProduct: (String
                                                         title,
-                                                            String description,String snackMessage) {
+                                                            String description,String mySnackMessage) {
                                                           updateItem(index, title,
                                                               description);
-                                                          mySnakBar(snackMessage, context);
-                                                          myAlertDialog(snackMessage, context);
-                                                        },
+                                                          MySnackBar(mySnackMessage, context);},
                                                       );
                                                     });
                                               },
                                               child: Text(
                                                 "Edit",
                                                 style:
-                                                TextStyle(color: Colors.cyan),
+                                                TextStyle(color: Colors.cyan,fontSize: 20),
                                               ),
                                             ),
                                             TextButton(
@@ -219,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               child: Text(
                                                 "Delete",
                                                 style:
-                                                TextStyle(color: Colors.cyan),
+                                                TextStyle(color: Colors.cyan,fontSize: 20),
                                               ),
                                             ),
                                           ],
@@ -228,11 +250,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     });
                               },
                               leading: CircleAvatar(
-                                child: Text("${index + 1}"),
-                                backgroundColor: myProductList[index].color ==
-                                    Colors.purpleAccent
-                                    ? Colors.red
-                                    : Colors.purpleAccent,
+                                  child: Text("${index + 1}",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16,color: Colors.white),),
+                                  backgroundColor: myProductList[index].color
                               ),
                               title: Text("${myProductList[index].title}"),
                               subtitle: Text("${myProductList[index].description}"),
@@ -268,7 +287,7 @@ class Products {
   Products(
       {required this.title,
         required this.description,
-        this.color = Colors.purpleAccent});
+        this.color = Colors.red});
 }
 
 class UpdateProductModal extends StatefulWidget {
@@ -343,10 +362,10 @@ class _UpdateProductModalState extends State<UpdateProductModal> {
               child: ElevatedButton(
                 onPressed: () {
                   if (_globalKey.currentState!.validate()) {
-                    // Navigator.pop(context);
+                    Navigator.pop(context);
                     widget.onTab_updateProduct(
                         updateTitle_TEController.text.trim(),
-                        upateDescription_TEController.text.trim(),"Your product updated successfully!");
+                        upateDescription_TEController.text.trim(),"Edited successfully!");
                   }
                 },
                 child: Text("EDIT DONE"),

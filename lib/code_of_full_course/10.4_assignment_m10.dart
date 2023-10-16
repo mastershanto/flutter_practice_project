@@ -36,9 +36,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<Products> myProductList = [];
 
-  addItem(Products items) {
+  addItem(Products products) {
     setState(() {
-      myProductList.add(items);
+      myProductList.add(products);
+      if(products.description==""){
+        products.description="This is description....";
+      }
     });
   }
 
@@ -58,8 +61,6 @@ class _HomeScreenState extends State<HomeScreen> {
   addColor({required int index,required var color}){
     myProductList[index].color=color;
   }
-
-
 
   MySnackBar(massage, context) {
     return ScaffoldMessenger.of(context)
@@ -123,12 +124,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 TextFormField(
                   controller: description_TEController,
-                  validator: (content) {
+
+                  /*validator: (content) {
                     if (content?.isEmpty ?? true) {
                       return "Enter a valid value: Description!";
                     }
                     return null;
-                  },
+                  },*/
                   decoration: InputDecoration(
                     hintText: "Add description",
                     enabledBorder: OutlineInputBorder(
@@ -146,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       if (_globalKey.currentState!.validate()) {
                         addItem(Products(
                           title: title_TEController.text.trim(),
-                          description: description_TEController.text.trim(),
+                          description:description_TEController.text.trim(),
                         ));
                         title_TEController.clear();
                         description_TEController.clear();
@@ -168,10 +170,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemBuilder: (context, index) {
                       // myProductList[index].color==Colors.purpleAccent ? addColor(index: index, color: Colors.red):addColor(index: index, color: Colors.purpleAccent);
                       if(index%2==0){
-                       var color=Colors.red;
+                       var color=Colors.blueGrey;
                         addColor(index: index,color: color);
                       }else{
-                        var color=Colors.purpleAccent;
+                        var color=Colors.cyan;
                         addColor(index: index,color: color);
                       }
 
@@ -248,7 +250,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 });
                           },
                           leading: CircleAvatar(
-                            child: Text("${index + 1}"),
+                            child: Text("${index + 1}",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16,color: Colors.white),),
                             backgroundColor: myProductList[index].color
                           ),
                           title: Text("${myProductList[index].title}"),
@@ -285,7 +287,7 @@ class Products {
   Products(
       {required this.title,
       required this.description,
-      this.color = Colors.purpleAccent});
+      this.color = Colors.red});
 }
 
 class UpdateProductModal extends StatefulWidget {
