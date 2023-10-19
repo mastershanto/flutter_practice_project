@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "package:flutter_practice_project/components/styles.dart";
+import "package:flutter_practice_project/components/styleCollections_1.dart";
 import "package:responsive_builder/responsive_builder.dart";
 
 void main() {
