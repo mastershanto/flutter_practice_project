@@ -10,6 +10,8 @@ class DateTimeFormats_V1 {
   dateTime_Format_2(dateTime_ListTile, context) {
     return DateFormat("dd-MM-yyyy, hh:mm:ssa")
         .format(dateTime_ListTile.dateTime);}
+  dateTime_Format_3(dateTime_ListTile, context) {
+    return DateFormat("dd/MM/yyyy (hh:mm:ssa)").format(DateTime.now());}
 
 
 
