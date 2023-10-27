@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_practice_project/widgets/alartMessage_2.dart';
-import 'package:flutter_practice_project/widgets/myItems_1.dart';
-import 'package:flutter_practice_project/widgets/listView_3.dart';
-import 'package:flutter_practice_project/widgets/textField_4.dart';
+import 'package:flutter_practice_project/widgets/alert_message_1.dart';
+import 'package:flutter_practice_project/widgets/my_items_1.dart';
+import 'package:flutter_practice_project/widgets/list_view_1.dart';
+import 'package:flutter_practice_project/widgets/text_field.dart';
 
 class GridViewBuilder_7 extends StatelessWidget {
   @override

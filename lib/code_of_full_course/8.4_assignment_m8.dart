@@ -114,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Profile"),
+          title: const Text("Profile"),
         ),
         body: OrientationBuilder(
           builder: (context, orientation) {
@@ -159,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ))
                 : Container(
-              padding: EdgeInsets.only(left: 5),
+              padding: const EdgeInsets.only(left: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -168,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     fit: FlexFit.tight,
                     child: Stack(
                       children: [
-                        Container(
+                        const SizedBox(
                           width: double.infinity,
                           height: double.infinity,
                         ),

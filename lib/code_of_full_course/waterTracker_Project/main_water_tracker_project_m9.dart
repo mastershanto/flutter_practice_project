@@ -1,11 +1,13 @@
 import 'package:device_preview/device_preview.dart';
 import "package:flutter/material.dart";
 import 'package:intl/intl.dart';
-import 'package:flutter_practice_project/code_of_full_course/waterTracker_Project/components/customStyle_p1.dart';
+import 'package:flutter_practice_project/code_of_full_course/waterTracker_Project/components/custom_style_p1.dart';
+
 
 void main() {
   runApp(DevicePreview(builder: (context) {
-    return MyApp();
+
+    return const MyApp();
   }));
 }
 
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: "Water Tracker Application",
       home: HomeScreen(),
     );
@@ -22,7 +24,7 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -31,7 +33,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int totalConsume = 0;
   List<WaterTrack> consumeList = [];
-  TextEditingController _amountOfGlassTEController =
+  int totolAmount=0;
+
+  final TextEditingController _amountOfGlassTEController =
       TextEditingController(text: "1");
 
   @override
@@ -48,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: Center(
           child: Container(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -57,67 +61,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   "Water Tracker",
                   style: bodyTitleMedium(context),
                 ),
-                Divider(
+                const Divider(
                   height: 5,
                 ),
-                TextFormField(
-                  decoration: textFormFieldCircularStyle(labelText: "Email"),
-                ),
-                Divider(
-                  height: 5,
-                ),
-                TextFormField(
-                  decoration:
-                      textFormFieldRectangularStyle(labelText: "Password"),
-                ),
-                Divider(
-                  height: 5,
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: elevatedButtonCircularStyle(context: context),
-                  child: Container(
-                    // padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "TRACK",/*style: bodyHeadlineSmall(context,color: Colors.green),*/
-                    ),
-                  ),
-                ),
-                Divider(
-                  height: 5,
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: elevatedButtonGeneralStyle(context: context),
-                  child: Container(
-                    // padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "TRACK",/*style: bodyHeadlineSmall(context,color: Colors.green),*/
-                    ),
-                  ),
-                ),
-                Divider(
-                  height: 5,
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: elevatedButtonRectangularStyle(context: context),
-                  child: Container(
-                    // padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "TRACK",/*style: bodyHeadlineSmall(context,color: Colors.green),*/
-                    ),
-                  ),
-                ),
-                Divider(
-                  height: 5,
-                ),
-                Text("${consumeList.length}", style: bodyTextExtraSmall(context,sizeRatio: 50)),
-                Divider(
-                  height: 5,
-                ),
-                Text("${consumeList.length}", style: bodyTitleMedium(context)),
-                Divider(
+
+                Text("${totolAmount}", style: bodyTitleMedium(context)),
+                const Divider(
                   height: 5,
                 ),
                 Row(
@@ -126,16 +75,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(
                       width: 50,
                       child: TextFormField(
-                        keyboardType: TextInputType.number,
-                        controller: _amountOfGlassTEController,
-                        decoration: textFormFieldRectangularStyle()
-                      ),
+                        style: bodyHeadlineSmall(context),
+                          keyboardType: TextInputType.number,
+                          controller: _amountOfGlassTEController,
+                          decoration: textFormFieldRectangularStyle()),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     ElevatedButton(
-                      style: elevatedButtonCircularStyle(context: context),
+                        style: elevatedButtonCircularStyle(context: context),
                         onPressed: () {
                           setState(() {
                             int amount = int.tryParse(
@@ -144,9 +93,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             WaterTrack waterTrack = WaterTrack(
                                 time: DateTime.now(), nosOfGlass: amount);
                             consumeList.add(waterTrack);
+                            totolAmount+=amount;
                           });
                         },
-                        child: Text("ADD")),
+                        child: const Text("ADD")),
                   ],
                 ),
                 Expanded(
@@ -155,19 +105,19 @@ class _HomeScreenState extends State<HomeScreen> {
                       // shrinkWrap: ,
                       // reverse: true,
                       itemBuilder: (context, index) {
-                        String formatted_DateTime =
+                        String formattedDatetime =
                             DateFormat("dd/MM/yyyy (HH:mm:ssa)")
                                 .format(consumeList[index].time);
                         return ListTile(
                           leading: CircleAvatar(
                             child: Text("${index + 1}"),
                           ),
-                          title: Text("${formatted_DateTime}"),
+                          title: Text(formattedDatetime),
                           trailing: Text("${consumeList[index].nosOfGlass}"),
                         );
                       },
                       separatorBuilder: (context, index) {
-                        return Divider(
+                        return const Divider(
                           height: 0,
                         );
                       },

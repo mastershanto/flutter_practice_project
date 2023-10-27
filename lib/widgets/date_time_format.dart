@@ -3,17 +3,15 @@ import 'package:intl/intl.dart';
 
 class DateTimeFormats_V1 {
 
-  dateTime_Format_1(dateTime_ListTile, context){
+  formattedDateTimeStyleOne(dateTimeFormation, context){
     return DateFormat("dd-MM-yyyy, hh:mma")
-        .format(dateTime_ListTile.dateTime);}
+        .format(dateTimeFormation.dateTime);}
 
-  dateTime_Format_2(dateTime_ListTile, context) {
+  formattedDateTimeStyleTwo(dateTimeFormation, context) {
     return DateFormat("dd-MM-yyyy, hh:mm:ssa")
-        .format(dateTime_ListTile.dateTime);}
-  dateTime_Format_3(dateTime_ListTile, context) {
+        .format(dateTimeFormation.dateTime);}
+  formattedDateTimeStyleThree(dateTimeFormation, context) {
     return DateFormat("dd/MM/yyyy (hh:mm:ssa)").format(DateTime.now());}
-
-
 
 }
 

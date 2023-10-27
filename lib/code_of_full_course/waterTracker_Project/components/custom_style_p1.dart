@@ -1,3 +1,9 @@
+//todo: 1. Styles are appBarTitleLarge, appBarTitleMedium, appBarTitleSmall, appBarTitleExtraSmall
+//todo: 2. Styles are bodyTitleLarge, bodyTitleMedium, bodyTitleSmall, bodyTitleExtraSmall
+//todo: 3. Styles are bodyHeadlineLarge, bodyHeadlineMedium, bodyHeadlineSmall, bodyHeadlineExtraSmall
+//todo: 4. Style are textFormFieldGeneralStyle, textFormFieldCircularStyle, textFormFieldRectangularStyle,
+//todo: 5. Style are elevatedButtonGeneralStyle, elevatedButtonCircularStyle, elevatedButtonRectangularStyle
+
 import 'package:flutter/material.dart';
 
 // TestStyles for AppBar
@@ -351,56 +357,121 @@ TextStyle bodyTextExtraSmall(context,
 }
 
 /// Styles for Text Form Fields
-InputDecoration textFormFieldGeneralStyle({labelText, hintText, color}) {
+InputDecoration textFormFieldGeneralStyle(
+    {labelText,
+      hintText,
+      fillColor,
+      enableBorderColor,
+      focusBorderColor,
+      disableBorderColor,
+      hintTextColor}) {
   return InputDecoration(
-      labelText: labelText,
-      border: OutlineInputBorder(),
-      filled: true,
-      fillColor: color ?? Colors.white,
       enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(
-          color: Colors.red,
-          width: 2,
-        ),
+        borderSide:
+        BorderSide(width: 2, color: enableBorderColor ?? Colors.grey),
+        borderRadius: const BorderRadius.all(Radius.circular(0)),
       ),
+      focusedBorder: OutlineInputBorder(
+        borderSide:
+        BorderSide(width: 2, color: focusBorderColor ?? Colors.blue),
+        borderRadius: const BorderRadius.all(Radius.circular(0)),
+      ),
+      disabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: disableBorderColor ?? Colors.red)),
+      labelText: labelText,
+      border: const OutlineInputBorder(
+        borderSide: BorderSide(),
+        borderRadius: BorderRadius.all(Radius.circular(0)),
+      ),
+      filled: true,
+      fillColor: fillColor ?? Colors.white,
       hintText: hintText ?? labelText == null
           ? "Enter your input here..."
           : "Enter the ${labelText.toString().toLowerCase()} here...",
-      contentPadding: EdgeInsets.fromLTRB(20, 10, 10, 20));
+      hintStyle: hintTextColor == null
+          ? TextStyle(color: hintTextColor)
+          : const TextStyle(color: null),
+      contentPadding: const EdgeInsets.fromLTRB(20, 10, 10, 20));
 }
 
-InputDecoration textFormFieldCircularStyle({labelText, hintText, color}) {
+InputDecoration textFormFieldCircularStyle(
+    {labelText,
+    hintText,
+    fillColor,
+    enableBorderColor,
+    focusBorderColor,
+    disableBorderColor,
+    hintTextColor}) {
   return InputDecoration(
-    enabledBorder: OutlineInputBorder(borderSide: BorderSide(width: 2)),
-      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.red,width: 4)),
+      enabledBorder: OutlineInputBorder(
+        borderSide:
+            BorderSide(width: 2, color: enableBorderColor ?? Colors.grey),
+        borderRadius: const BorderRadius.all(Radius.circular(50)),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide:
+            BorderSide(width: 2, color: focusBorderColor ?? Colors.blue),
+        borderRadius: const BorderRadius.all(Radius.circular(50)),
+      ),
+      disabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: disableBorderColor ?? Colors.red)),
       labelText: labelText,
-      border: OutlineInputBorder(
+      border: const OutlineInputBorder(
         borderSide: BorderSide(),
         borderRadius: BorderRadius.all(Radius.circular(50)),
       ),
       filled: true,
-      fillColor: color ?? Colors.white,
+      fillColor: fillColor ?? Colors.white,
       hintText: hintText ?? labelText == null
           ? "Enter your input here..."
           : "Enter the ${labelText.toString().toLowerCase()} here...",
-      contentPadding: EdgeInsets.fromLTRB(20, 10, 10, 20));
+      hintStyle: hintTextColor == null
+          ? TextStyle(color: hintTextColor)
+          : const TextStyle(color: null),
+      contentPadding: const EdgeInsets.fromLTRB(20, 10, 10, 20));
 }
 
-InputDecoration textFormFieldRectangularStyle({labelText, hintText, color}) {
+InputDecoration textFormFieldRectangularStyle(
+    {labelText,
+      hintText,
+      fillColor,
+      enableBorderColor,
+      focusBorderColor,
+      disableBorderColor,
+      hintTextColor}) {
   return InputDecoration(
+      enabledBorder: OutlineInputBorder(
+        borderSide:
+        BorderSide(width: 2, color: enableBorderColor ?? Colors.grey),
+        borderRadius: const BorderRadius.all(Radius.circular(0)),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide:
+        BorderSide(width: 2, color: focusBorderColor ?? Colors.blue),
+        borderRadius: const BorderRadius.all(Radius.circular(0)),
+      ),
+      disabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: disableBorderColor ?? Colors.red)),
       labelText: labelText,
-      border: OutlineInputBorder(
-        borderSide: BorderSide(width: 2),
+      border: const OutlineInputBorder(
+        borderSide: BorderSide(),
+        borderRadius: BorderRadius.all(Radius.circular(0)),
       ),
       filled: true,
-      fillColor: color ?? Colors.white,
+      fillColor: fillColor ?? Colors.white,
       hintText: hintText ?? labelText == null
           ? "Enter your input here..."
           : "Enter the ${labelText.toString().toLowerCase()} here...",
-      contentPadding: EdgeInsets.fromLTRB(20, 10, 10, 20));
+      hintStyle: hintTextColor == null
+          ? TextStyle(color: hintTextColor)
+          : const TextStyle(color: null),
+      contentPadding: const EdgeInsets.fromLTRB(20, 10, 10, 20));
 }
 
-InputDecoration textFormFieldCornerStyleOne({labelText, hintText, color}) {
+
+
+InputDecoration textFormFieldTopLeftBottomRightCornerStyleOne(
+    {labelText, hintText, color}) {
   return InputDecoration(
       labelText: labelText,
       border: const OutlineInputBorder(
@@ -411,7 +482,22 @@ InputDecoration textFormFieldCornerStyleOne({labelText, hintText, color}) {
       hintText: hintText ?? labelText == null
           ? "Enter your input here..."
           : "Enter the ${labelText.toString().toLowerCase()} here...",
-      contentPadding: EdgeInsets.fromLTRB(20, 10, 10, 20));
+      contentPadding: const EdgeInsets.fromLTRB(20, 10, 10, 20));
+}
+
+InputDecoration textFormFieldTopRightBottomLeftCornerStyleOne(
+    {labelText, hintText, color}) {
+  return InputDecoration(
+      labelText: labelText,
+      border: const OutlineInputBorder(
+        borderSide: BorderSide(width: 2),
+      ),
+      filled: true,
+      fillColor: color ?? Colors.white,
+      hintText: hintText ?? labelText == null
+          ? "Enter your input here..."
+          : "Enter the ${labelText.toString().toLowerCase()} here...",
+      contentPadding: const EdgeInsets.fromLTRB(20, 10, 10, 20));
 }
 
 /// Styles for Elevated Buttons
@@ -425,7 +511,7 @@ InputDecoration textFormFieldCornerStyleOne({labelText, hintText, color}) {
 ButtonStyle elevatedButtonGeneralStyle({required context, bgColor, fgColor}) {
   return ElevatedButton.styleFrom(
     padding: const EdgeInsets.all(8),
-    textStyle: context==null? null: bodyHeadlineSmall(context),
+    textStyle: context == null ? null : bodyHeadlineSmall(context),
     backgroundColor: bgColor ?? Colors.blue,
     foregroundColor: fgColor ?? Colors.white,
     disabledForegroundColor: Colors.red,
@@ -434,10 +520,11 @@ ButtonStyle elevatedButtonGeneralStyle({required context, bgColor, fgColor}) {
     ),
   );
 }
+
 ButtonStyle elevatedButtonCircularStyle({required context, bgColor, fgColor}) {
   return ElevatedButton.styleFrom(
     padding: const EdgeInsets.all(8),
-    textStyle: context==null? null: bodyHeadlineSmall(context),
+    textStyle: context == null ? null : bodyHeadlineSmall(context),
     backgroundColor: bgColor ?? Colors.blue,
     foregroundColor: fgColor ?? Colors.white,
     disabledForegroundColor: Colors.red,
@@ -446,10 +533,12 @@ ButtonStyle elevatedButtonCircularStyle({required context, bgColor, fgColor}) {
     ),
   );
 }
-ButtonStyle elevatedButtonRectangularStyle({required context, bgColor, fgColor}) {
+
+ButtonStyle elevatedButtonRectangularStyle(
+    {required context, bgColor, fgColor}) {
   return ElevatedButton.styleFrom(
     padding: const EdgeInsets.all(8),
-    textStyle: context==null? null: bodyHeadlineSmall(context),
+    textStyle: context == null ? null : bodyHeadlineSmall(context),
     backgroundColor: bgColor ?? Colors.blue,
     foregroundColor: fgColor ?? Colors.white,
     disabledForegroundColor: Colors.red,
@@ -458,7 +547,6 @@ ButtonStyle elevatedButtonRectangularStyle({required context, bgColor, fgColor})
     ),
   );
 }
-
 
 /*ButtonStyle elevatedButtonRectangularStyle({bgColor, fgColor}) {
   return ElevatedButton.styleFrom(
@@ -471,19 +559,19 @@ ButtonStyle elevatedButtonRectangularStyle({required context, bgColor, fgColor})
 TextStyle headLine(context) {
   var width = MediaQuery.of(context).size.width;
   if (width < 700) {
-    return TextStyle(
+    return const TextStyle(
       color: Colors.red,
       fontSize: 35,
     );
   } else {
-    return TextStyle(
+    return const TextStyle(
       color: Colors.green,
       fontSize: 65,
     );
   }
 }
 
-TextStyle head_tok({color, fontSize}) {
+TextStyle headTok({color, fontSize}) {
   return TextStyle(
       fontSize: fontSize ?? 20,
       color: color ?? Colors.black,
