@@ -1,7 +1,7 @@
 import 'package:device_preview/device_preview.dart';
 import "package:flutter/material.dart";
 import 'package:intl/intl.dart';
-import 'package:flutter_practice_project/code_of_full_course/waterTracker_Project/components/custom_style_p1.dart';
+import 'package:flutter_practice_project/code_of_full_course/9.9_waterTrackerApp/components/custom_style_p1.dart';
 
 
 void main() {
@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 5,
                 ),
 
-                Text("${totolAmount}", style: bodyTitleMedium(context)),
+                Text("$totolAmount", style: bodyTitleMedium(context)),
                 const Divider(
                   height: 5,
                 ),

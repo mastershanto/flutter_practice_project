@@ -161,7 +161,7 @@ class OrdersScreen extends StatelessWidget {
 }
 
 class ProductListScreen extends StatelessWidget {
-  const ProductListScreen({super.key});
+  const ProductListScreen({super.key, title});
 
   @override
   Widget build(BuildContext context) {

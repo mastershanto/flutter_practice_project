@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_practice_project/widgets/list_view_builder_1.dart';
-import 'package:flutter_practice_project/widgets/grid_view_builder_1.dart';
+
+import '../../9.9_waterTrackerApp/widgets/grid_view_builder_1.dart';
+import '../../9.9_waterTrackerApp/widgets/list_view_builder_1.dart';
+
 class MyNavigator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

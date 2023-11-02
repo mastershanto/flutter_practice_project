@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_practice_project/components/styleCollections_1.dart';
+
+import ' 11.0_liveClas-1_CRUD_APP_m11/components/custom_style_p1.dart';
+
 
 void main() {
   runApp(MyApp());

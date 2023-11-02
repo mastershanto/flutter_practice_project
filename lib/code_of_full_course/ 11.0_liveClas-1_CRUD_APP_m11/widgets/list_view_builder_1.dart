@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_practice_project/widgets/alert_message_1.dart';
-import 'package:flutter_practice_project/widgets/my_items_1.dart';
-import 'package:flutter_practice_project/widgets/list_view_1.dart';
-import 'package:flutter_practice_project/widgets/text_field.dart';
-import 'package:flutter_practice_project/widgets/grid_view_builder_1.dart';
+
+
+import '../../../widgets/my_items_1.dart';
+import '../../9.9_waterTrackerApp/widgets/alert_message_1.dart';
+import '../../9.9_waterTrackerApp/widgets/grid_view_builder_1.dart';
+import '../../9.9_waterTrackerApp/widgets/my_items_1.dart';
 
 
 class ListViewBuilder_6 extends StatelessWidget {

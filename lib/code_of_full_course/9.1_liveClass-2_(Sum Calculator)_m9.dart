@@ -1,6 +1,7 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_practice_project/components/styleCollections_1.dart';
+import 'package:flutter_practice_project/code_of_full_course/%2011.0_liveClas-1_CRUD_APP_m11/components/custom_style_p1.dart';
+
 
 void main() {
   runApp(DevicePreview(builder: (context) {
@@ -48,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Text(
                       "ADD ALL NUMBERS",
-                      style: HeadTextStyle(),
+                      style: bodyTextExtraSmall(context),
                     ),
                     const SizedBox(
                       height: 16,
