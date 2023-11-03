@@ -2,6 +2,7 @@
 //Todo: Github merging, Rebasing git,
 
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_project/code_of_full_course/%2011.0_liveClas-1_CRUD_APP_m11/components/custom_style_p1.dart';
 import 'package:flutter_practice_project/code_of_full_course/%2011.0_liveClas-1_CRUD_APP_m11/screens/product_create_screen.dart';
@@ -21,19 +22,70 @@ class ProductListScreen extends StatefulWidget {
 }
 
 class _ProductListScreenState extends State<ProductListScreen> {
+  // List<Product> productList = [];
   List<Product> productList = [];
 
-  bool inProgress=false;
+  //
+  // bool inProgress=false;
+  bool inProgress = false;
 
+  //
+  // @override
+  // void initState() {
+  //   getProductList();
+  //   super.initState();
+  // }
+  //
   @override
   void initState() {
     getProductList();
     super.initState();
   }
 
+  /* void getProductList() async {
+
+      inProgress = true;
+      setState(() {
+
+      });
+    Response getResponse =
+        await get(Uri.parse("https://crud.teamrabbil.com/api/v1/ReadProduct"));
+    print(getResponse);
+    print(getResponse.body);
+    print(getResponse.statusCode);
+
+    if (getResponse.statusCode == 200) {
+      final Map<String, dynamic> getResponseData = jsonDecode(getResponse.body);
+      if (getResponseData["status"] == "success") {
+        for (Map<String, dynamic> productJson in getResponseData["body"]) {
+          setState(() {
+            productList.clear();
+            productList.add(Product(
+                productJson["_id"],
+                productJson["ProductName"],
+                productJson["ProductCode"],
+                productJson["Img"],
+                productJson["UnitPrice"],
+                productJson["Qty"],
+                productJson["TotalPrice"],
+
+
+            ));
+          });
+        }
+      }
+    }
+
+    inProgress=false;
+    print(productList.length);
+
+  }
+*/
+
   void getProductList() async {
     setState(() {
-      inProgress=true;
+      productList.clear();
+      inProgress = true;
     });
 
     Response getResponse =
@@ -42,23 +94,25 @@ class _ProductListScreenState extends State<ProductListScreen> {
     print(getResponse.body);
 
     if (getResponse.statusCode == 200) {
-      final Map<String,dynamic> getResponseData = jsonDecode(getResponse.body);
+      final Map<String, dynamic> getResponseData = jsonDecode(getResponse.body);
       if (getResponseData["status"] == "success") {
         for (Map<String, dynamic> productJson in getResponseData["data"]) {
           setState(() {
+
             productList.add(Product(
-                productJson["_id"],
-                productJson["ProductName"],
-                productJson["ProductCode"],
-                productJson["Img"],
-                productJson["UnitPrice"],
-                productJson["Qty"],
-                productJson["TotalPrice"]));
+                productJson["_id"] ?? "",
+                productJson["ProductName"] ?? "",
+                productJson["ProductCode"] ?? "",
+                productJson["Img"] ?? "",
+                productJson["UnitPrice"] ?? "",
+                productJson["Qty"] ?? "",
+                productJson["TotalPrice"] ?? ""));
           });
+
         }
       }
     }
-    inProgress=false;
+    inProgress = false;
     print(productList.length);
   }
 
@@ -74,22 +128,30 @@ class _ProductListScreenState extends State<ProductListScreen> {
         ),
         backgroundColor: Colors.blueGrey,
         centerTitle: true,
-        actions: [Padding(
-          padding: const EdgeInsets.only(right: 50),
-          child: IconButton(onPressed: (){
-            getProductList();
-          }, icon: Icon(Icons.refresh)),
-        )],
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 50),
+            child: IconButton(
+                onPressed: () {
+                  getProductList();
+                },
+                icon: Icon(Icons.refresh)),
+          )
+        ],
       ),
-      body: inProgress ? const Center(child:CircularProgressIndicator()): ListView.separated(
-        itemCount: productList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ProductItem(product: productList[index],);
-        },
-        separatorBuilder: (_, __) => Divider(
-          height: 0,
-        ),
-      ),
+      body: inProgress
+          ? const Center(child: CircularProgressIndicator())
+          : ListView.separated(
+              itemCount: productList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ProductItem(
+                  product: productList[index],
+                );
+              },
+              separatorBuilder: (_, __) => Divider(
+                height: 0,
+              ),
+            ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context,
@@ -102,17 +164,18 @@ class _ProductListScreenState extends State<ProductListScreen> {
 }
 
 class ProductItem extends StatelessWidget {
-  const ProductItem({
-    super.key,required this.product
-  });
+  const ProductItem({super.key, required this.product});
+
   final Product product;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       leading: Image.network(
-         product.image,height: 80,),
-      title:  Text(product.productName),
+        product.image,
+        height: 80,
+      ),
+      title: Text(product.productName),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
