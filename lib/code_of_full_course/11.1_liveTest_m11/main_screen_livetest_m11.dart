@@ -10,7 +10,7 @@ class CrudApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'weather_app',
 
       home: HomeScreen(),
@@ -69,32 +69,32 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Weather Info App",style:TextStyle(fontSize: 35,color: Colors.white, fontWeight: FontWeight.bold),),
+        title: const Text("Weather Info App",style:TextStyle(fontSize: 25,color: Colors.white, fontWeight: FontWeight.bold),),
         backgroundColor: Colors.blue,
         elevation: 2,
       ),
       body: Container(
         color: Colors.white,
 
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(8),
         child:ListView.separated(itemBuilder: (context,index){
           return Card(
-            elevation: 20,
+            elevation: 5,
             child: ListTile(
-              title: Text("City: ${providedJsonString[index]["city"]}",style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+              title: Text("City: ${providedJsonString[index]["city"]}",style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Temperature: ${providedJsonString[index]["temperature"]} ",style: TextStyle(fontSize: 15,color: Colors.grey,fontWeight:FontWeight.w800)),
-                  Text("Condition: ${providedJsonString[index]["condition"]} ",style: TextStyle(fontSize: 15,color: Colors.grey,fontWeight:FontWeight.w800)),
-                  Text("Humidity: ${providedJsonString[index]["humidity"]} ",style: TextStyle(fontSize: 15,color: Colors.grey,fontWeight:FontWeight.w800)),
-                  Text("Wind Speed: ${providedJsonString[index]["windSpeed"]} ",style: TextStyle(fontSize: 15,color: Colors.grey,fontWeight:FontWeight.w800)),
+                  Text("Temperature: ${providedJsonString[index]["temperature"]} ",style: const TextStyle(fontSize: 15,color: Colors.grey,fontWeight:FontWeight.w800)),
+                  Text("Condition: ${providedJsonString[index]["condition"]} ",style: const TextStyle(fontSize: 15,color: Colors.grey,fontWeight:FontWeight.w800)),
+                  Text("Humidity: ${providedJsonString[index]["humidity"]} ",style: const TextStyle(fontSize: 15,color: Colors.grey,fontWeight:FontWeight.w800)),
+                  Text("Wind Speed: ${providedJsonString[index]["windSpeed"]} ",style: const TextStyle(fontSize: 15,color: Colors.grey,fontWeight:FontWeight.w800)),
                 ],
               ),
             ),
           );
         }, separatorBuilder: (context,index){
-          return Divider(height: 4);
+          return const Divider(height: 4);
         }, itemCount:providedJsonString.length) ,
       ),
     );
