@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const CrudApp());
+  runApp(const LiveTestForModule11());
 }
 
-class CrudApp extends StatelessWidget {
-  const CrudApp({super.key});
+class LiveTestForModule11 extends StatelessWidget {
+  const LiveTestForModule11({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: 'weather_app',
+      title: 'live_test_module-11',
 
       home: HomeScreen(),
     );
