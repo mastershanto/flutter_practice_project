@@ -98,7 +98,6 @@ class _ProductListScreenState extends State<ProductListScreen> {
       if (getResponseData["status"] == "success") {
         for (Map<String, dynamic> productJson in getResponseData["data"]) {
           setState(() {
-
             productList.add(Product(
                 productJson["_id"] ?? "",
                 productJson["ProductName"] ?? "",
@@ -108,7 +107,6 @@ class _ProductListScreenState extends State<ProductListScreen> {
                 productJson["Qty"] ?? "",
                 productJson["TotalPrice"] ?? ""));
           });
-
         }
       }
     }
@@ -118,8 +116,6 @@ class _ProductListScreenState extends State<ProductListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    /*Size size=MediaQuery.of(context).size;
-    debugPrint(size as String?);*/
     return Scaffold(
       appBar: AppBar(
         title: Text(

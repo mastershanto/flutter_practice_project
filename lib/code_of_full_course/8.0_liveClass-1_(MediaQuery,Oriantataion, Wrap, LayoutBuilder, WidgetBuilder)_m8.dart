@@ -68,7 +68,7 @@ class HomeScreen extends StatelessWidget {
 }
 
 /*import 'package:flutter/material.dart';
-import 'package:live_class_project/product_list_screen.dart';
+import 'package:live_class_project/photo_list_screen.dart';
 
 void main() {
   runApp(MyApp());
