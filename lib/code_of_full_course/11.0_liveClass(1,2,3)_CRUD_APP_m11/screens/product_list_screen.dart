@@ -4,8 +4,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_practice_project/code_of_full_course/11.0_liveClass(1,2,3)_CRUD_APP_m11/components/custom_style_p1.dart';
 import 'package:flutter_practice_project/code_of_full_course/11.0_liveClass(1,2,3)_CRUD_APP_m11/screens/product_create_screen.dart';
+import 'package:flutter_practice_project/code_of_full_course/11.0_liveClass(1,2,3)_CRUD_APP_m11/screens/product.dart';
 import 'package:http/http.dart';
 
 //Todo: Use of  "ExpansionTile";
@@ -22,65 +22,9 @@ class ProductListScreen extends StatefulWidget {
 }
 
 class _ProductListScreenState extends State<ProductListScreen> {
-  // List<Product> productList = [];
   List<Product> productList = [];
 
-  //
-  // bool inProgress=false;
   bool inProgress = false;
-
-  //
-  // @override
-  // void initState() {
-  //   getProductList();
-  //   super.initState();
-  // }
-  //
-  @override
-  void initState() {
-    getProductList();
-    super.initState();
-  }
-
-  /* void getProductList() async {
-
-      inProgress = true;
-      setState(() {
-
-      });
-    Response getResponse =
-        await get(Uri.parse("https://crud.teamrabbil.com/api/v1/ReadProduct"));
-    print(getResponse);
-    print(getResponse.body);
-    print(getResponse.statusCode);
-
-    if (getResponse.statusCode == 200) {
-      final Map<String, dynamic> getResponseData = jsonDecode(getResponse.body);
-      if (getResponseData["status"] == "success") {
-        for (Map<String, dynamic> productJson in getResponseData["body"]) {
-          setState(() {
-            productList.clear();
-            productList.add(Product(
-                productJson["_id"],
-                productJson["ProductName"],
-                productJson["ProductCode"],
-                productJson["Img"],
-                productJson["UnitPrice"],
-                productJson["Qty"],
-                productJson["TotalPrice"],
-
-
-            ));
-          });
-        }
-      }
-    }
-
-    inProgress=false;
-    print(productList.length);
-
-  }
-*/
 
   void getProductList() async {
     setState(() {
@@ -90,30 +34,42 @@ class _ProductListScreenState extends State<ProductListScreen> {
 
     Response getResponse =
         await get(Uri.parse("https://crud.teamrabbil.com/api/v1/ReadProduct"));
-    print(getResponse);
-    print(getResponse.body);
 
     if (getResponse.statusCode == 200) {
       final Map<String, dynamic> getResponseData = jsonDecode(getResponse.body);
       if (getResponseData["status"] == "success") {
         for (Map<String, dynamic> productJson in getResponseData["data"]) {
           setState(() {
-
-            productList.add(Product(
-                productJson["_id"] ?? "",
-                productJson["ProductName"] ?? "",
-                productJson["ProductCode"] ?? "",
-                productJson["Img"] ?? "",
-                productJson["UnitPrice"] ?? "",
-                productJson["Qty"] ?? "",
-                productJson["TotalPrice"] ?? ""));
+            productList.add(Product.fromJson(productJson));
           });
-
         }
       }
     }
     inProgress = false;
-    print(productList.length);
+  }
+
+  void deleteProduct(String productId) async {
+    setState(() {
+      productList.clear();
+      inProgress = true;
+    });
+
+    Response getResponse = await get(Uri.parse(
+        "https://crud.teamrabbil.com/api/v1/DeleteProduct/$productId"));
+
+    if (getResponse.statusCode == 200) {
+      getProductList();
+    } else {
+      setState(() {
+        inProgress = false;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    getProductList();
+    super.initState();
   }
 
   @override
@@ -124,7 +80,10 @@ class _ProductListScreenState extends State<ProductListScreen> {
       appBar: AppBar(
         title: Text(
           widget.title,
-          style: appBarTitleSmall(context, color: Colors.cyanAccent),
+          style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 30,
+              color: Colors.cyanAccent),
         ),
         backgroundColor: Colors.blueGrey,
         centerTitle: true,
@@ -135,27 +94,40 @@ class _ProductListScreenState extends State<ProductListScreen> {
                 onPressed: () {
                   getProductList();
                 },
-                icon: Icon(Icons.refresh)),
+                icon: const Icon(Icons.refresh)),
           )
         ],
       ),
-      body: inProgress
-          ? const Center(child: CircularProgressIndicator())
-          : ListView.separated(
-              itemCount: productList.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ProductItem(
-                  product: productList[index],
-                );
-              },
-              separatorBuilder: (_, __) => Divider(
-                height: 0,
+      body:
+      RefreshIndicator(
+
+        onRefresh: () async{
+          getProductList();
+
+        },
+        child: inProgress
+            ? const Center(child: CircularProgressIndicator())
+            : ListView.separated(
+                itemCount: productList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return ProductItem(
+                    product: productList[index],
+                    onPressDelete: (String productId) {
+                      deleteProduct(productId);
+                    },
+                  );
+                },
+                separatorBuilder: (_, __) => const Divider(
+                  height: 0,
+                ),
               ),
-            ),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => ProductCreateScreen()));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const ProductCreateScreen()));
         },
         child: const Icon(Icons.add),
       ),
@@ -164,9 +136,11 @@ class _ProductListScreenState extends State<ProductListScreen> {
 }
 
 class ProductItem extends StatelessWidget {
-  const ProductItem({super.key, required this.product});
+  const ProductItem(
+      {super.key, required this.product, required this.onPressDelete});
 
   final Product product;
+  final Function(String) onPressDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -181,14 +155,14 @@ class ProductItem extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text("Product Code: ${product.productCode}"),
-              SizedBox(
+              Expanded(child: Text("Product Code: ${product.productCode}")),
+              const SizedBox(
                 width: 16,
               ),
               Text("Total Price: ${product.totalPrice}"),
             ],
           ),
-          Text("Product Description:"),
+          Text("Product Quantity:${product.quantity}"),
         ],
       ),
       trailing: Text("\$${product.unitPrice}"),
@@ -222,7 +196,9 @@ class ProductItem extends StatelessWidget {
             onTap: () {
               Navigator.pop(context);
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return const ProductCreateScreen();
+                return ProductCreateScreen(
+                  product: product,
+                );
               }));
             },
             title: const Icon(Icons.edit),
@@ -233,25 +209,13 @@ class ProductItem extends StatelessWidget {
           ListTile(
             onTap: () {
               Navigator.pop(context);
+              onPressDelete(product.id);
             },
-            title: Icon(Icons.delete),
-            trailing: Text("Delete"),
+            title: const Icon(Icons.delete),
+            trailing: const Text("Delete"),
           ),
         ],
       ),
     );
   }
-}
-
-class Product {
-  final String id;
-  final String productName;
-  final String productCode;
-  final String image;
-  final String unitPrice;
-  final String quantity;
-  final String totalPrice;
-
-  Product(this.id, this.productName, this.productCode, this.image,
-      this.unitPrice, this.quantity, this.totalPrice);
 }

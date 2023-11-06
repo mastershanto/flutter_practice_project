@@ -15,7 +15,6 @@ class CrudApp extends StatelessWidget {
       title: 'flutter_crud_app',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
-
         useMaterial3: true,
       ),
       home: const ProductListScreen(title: 'CRUD Application'),
