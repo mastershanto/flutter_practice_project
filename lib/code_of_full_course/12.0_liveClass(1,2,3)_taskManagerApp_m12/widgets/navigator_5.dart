@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'grid_view_builder_1.dart';
-import 'list_view_builder_1.dart';
-
+import '../../9.9_waterTrackerApp/widgets/grid_view_builder_1.dart';
+import '../../9.9_waterTrackerApp/widgets/list_view_builder_1.dart';
 
 class MyNavigator extends StatelessWidget {
-  const MyNavigator({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Column(
