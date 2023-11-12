@@ -10,7 +10,7 @@ class Product {
   Product(this.id, this.productName, this.productCode, this.image,
       this.unitPrice, this.quantity, this.totalPrice);
 
-  ///Model class or pozu class
+  ///Model class or pozo class
   factory Product.fromJson(Map<String, dynamic> productJson) {
     return Product(
         productJson["_id"] ?? "",
@@ -21,6 +21,7 @@ class Product {
         productJson["Qty"] ?? "",
         productJson["TotalPrice"] ?? "");
   }
+
 
   Map<String, dynamic> toJson() {
     return {

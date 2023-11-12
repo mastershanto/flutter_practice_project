@@ -595,7 +595,7 @@ const colorDeepBlueOne = Color.fromRGBO(50, 0, 125, 1);
 
 SvgPicture screenBackground(BuildContext context) {
   return SvgPicture.asset(
-    "assets/images/Butterfly_img1.svg",
+    "assets/images/Butterfly.svg",
     alignment: Alignment.center,
     width: MediaQuery.of(context).size.width,
     height: MediaQuery.of(context).size.height,

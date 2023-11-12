@@ -22,7 +22,7 @@ class _PhotoInformationListScreenState
         await get(Uri.parse("https://jsonplaceholder.typicode.com/photos"));
 
     setState(() {
-      var decode = json.decode(response.body);
+      var decode = json.decode(response.body); /// This system as per Afran Shaker
       data = decode;
     });
   }
