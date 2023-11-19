@@ -10,11 +10,13 @@ class ProfileSummaryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onLongPress: () {
-        if(enableOnLongTab==true){
+        if (enableOnLongTab == true) {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const UpdateProfileScreen()));
+            context,
+            MaterialPageRoute(
+              builder: (context) => const UpdateProfileScreen(),
+            ),
+          );
         }
       },
       tileColor: Colors.green,
@@ -28,8 +30,9 @@ class ProfileSummaryCard extends StatelessWidget {
         "Sheikh Ajijul Hoque (Shanto)",
         style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
       ),
-      subtitle: const Text("mastershanto@gmail.com",style: TextStyle(color:Colors.white)),
-      trailing: enableOnLongTab? const Icon(Icons.arrow_forward): null,
+      subtitle: const Text("mastershanto@gmail.com",
+          style: TextStyle(color: Colors.white)),
+      trailing: enableOnLongTab ? const Icon(Icons.arrow_forward) : null,
     );
   }
 }

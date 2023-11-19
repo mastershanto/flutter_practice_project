@@ -8,7 +8,7 @@ class TaskManagerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: SplashScreen(),
+      home: const SplashScreen(),
       title: "Task Manager App",
       theme: ThemeData(
         inputDecorationTheme:const InputDecorationTheme(

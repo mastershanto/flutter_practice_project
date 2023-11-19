@@ -11,7 +11,7 @@ class BodyBackground extends StatelessWidget {
     return Stack(
       children: [
         SvgPicture.asset(
-          "assets/task_manager_project/images/background.svg",
+          "assets/task_manager_project_assets/images/background.svg",
           width: double.infinity,
           height: double.infinity,
           fit: BoxFit.cover,

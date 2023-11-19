@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter_practice_project/code_of_full_course/13.0_liveClass(1,2,3)_taskManagerApp_part-2_m13/ui/ui_screens/sign_up_screen.dart';
 import 'package:flutter_practice_project/code_of_full_course/13.0_liveClass(1,2,3)_taskManagerApp_part-2_m13/ui/ui_widgets/body_background.dart';
-
 import '../ui_widgets/profile_summary_card.dart';
 
 // import 'forgot_password_screen.dart';

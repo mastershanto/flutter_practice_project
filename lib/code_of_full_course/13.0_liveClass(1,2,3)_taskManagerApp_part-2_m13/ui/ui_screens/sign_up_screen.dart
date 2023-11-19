@@ -1,9 +1,15 @@
 //Todo: http and Dio used for connecting project with API Internet
+//todo for Assignment:  Email validation by RegEx
+//todo for Assignment:
+// validate the mobile no with 11 digits
 
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_project/code_of_full_course/13.0_liveClass(1,2,3)_taskManagerApp_part-2_m13/ui/ui_screens/forgot_password_screen.dart';
 import 'package:flutter_practice_project/code_of_full_course/13.0_liveClass(1,2,3)_taskManagerApp_part-2_m13/ui/ui_widgets/body_background.dart';
-import 'pin_verification_screen.dart';
+import 'package:flutter_practice_project/code_of_full_course/13.0_liveClass(1,2,3)_taskManagerApp_part-2_m13/data/network_caller/network_caller.dart';
+import 'package:flutter_practice_project/code_of_full_course/13.0_liveClass(1,2,3)_taskManagerApp_part-2_m13/data/network_caller/network_response.dart';
+import 'package:flutter_practice_project/code_of_full_course/13.0_liveClass(1,2,3)_taskManagerApp_part-2_m13/data/utility/urls.dart';
+import '../ui_widgets/snack_message.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -18,8 +24,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _lastNameTEController = TextEditingController();
   final TextEditingController _mobileTEController = TextEditingController();
   final TextEditingController _passwordTEController = TextEditingController();
+  final GlobalKey<FormState> _globalFormKey = GlobalKey<FormState>();
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool _signUpInProgress = false;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +37,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             padding: const EdgeInsets.all(24),
             child: SingleChildScrollView(
               child: Form(
-                key: _formKey,
+                key: _globalFormKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -104,6 +111,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         if (value?.trim().isEmpty ?? true) {
                           return "Enter your mobile number!";
                         }
+                        if(value!.length!=11){
+                          return "Mobile number must be 11 digit.!";
+                        }
+                        if(int.tryParse(value)==null){
+                          return "Mobile number must be numeric(a-z or A-Z).!";
+                        }
+
                         return null;
                       },
                       decoration: const InputDecoration(
@@ -117,7 +131,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       controller: _passwordTEController,
                       obscureText: true,
                       validator: (String? value) {
-                        if (value?.trim().isEmpty ?? true) {
+                        if (value?.isEmpty ?? true) {
                           return "Enter your valid password!";
                         }
 
@@ -135,19 +149,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     SizedBox(
                         width: double.infinity,
-                        child: ElevatedButton(
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const PinVerificationScreen()),
-                                    (context) => false);
-                              }
-                            },
-                            child:
-                                const Icon(Icons.arrow_circle_right_outlined))),
+                        child: Visibility(
+                          visible: _signUpInProgress == false,
+                          replacement: const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                          child: ElevatedButton(
+                              onPressed: () {
+                                _signUp();
+                              },
+                              child: const Icon(
+                                  Icons.arrow_circle_right_outlined)),
+                        )),
                     const SizedBox(
                       height: 48,
                     ),
@@ -197,13 +210,65 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
+  Future<void> _signUp() async {
+    if (_globalFormKey.currentState!.validate()) {
+      if (mounted) {
+        setState(() {
+          _signUpInProgress = true;
+        });
+      }
+      final NetworkResponse response =
+          await NetworkCaller().postRequest(Urls.registration, body: {
+        "firstName": _firstNameTEController.text.trim(),
+        "lastName": _lastNameTEController.text.trim(),
+        "email": _emailTEController.text.trim(),
+        "mobile": _mobileTEController.text.trim(),
+        "password": _passwordTEController.text,
+      });
+
+      if (mounted) {
+        setState(() {
+          _signUpInProgress = false;
+        });
+      }
+
+      if (response.isSuccess) {
+        _clearTextFields();
+        if (mounted) {
+          showSnackMessage(context, "Account has been created! Please login");
+        }
+      } else {
+        if (mounted) {
+          showSnackMessage(context, "Account creation failed! Try again.",
+              isError: true);
+        }
+      }
+
+      // Navigator.pushAndRemoveUntil(
+      //     context,
+      //     MaterialPageRoute(
+      //         builder: (context) =>
+      //         const PinVerificationScreen()),
+      //         (context) => false);
+    }
+  }
+
+  void _clearTextFields() {
+    _emailTEController.clear();
+    _firstNameTEController.clear();
+    _lastNameTEController.clear();
+    _passwordTEController.clear();
+    _passwordTEController.clear();
+  }
+
   @override
   void dispose() {
+    // TODO: implement dispose
     super.dispose();
     _emailTEController.dispose();
     _firstNameTEController.dispose();
     _lastNameTEController.dispose();
-    _mobileTEController.dispose();
+    _passwordTEController.dispose();
     _passwordTEController.dispose();
   }
 }

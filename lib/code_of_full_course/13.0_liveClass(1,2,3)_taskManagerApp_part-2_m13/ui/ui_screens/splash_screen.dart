@@ -31,8 +31,9 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Scaffold(
       body:BodyBackground(
         child: Center(
-          child: SvgPicture.asset(
-            "assets/task_manager_project/images/rabbil_vai_logo.svg",
+          child: /*Image.asset("assets/site.jpg"),*/
+          SvgPicture.asset(
+            "assets/logo.svg",
             width: 120,
           ),
         )
